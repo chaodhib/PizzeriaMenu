@@ -11,10 +11,18 @@ package be.chaouki.model;
  */
 public class Drink extends Item {
     private DrinkType type;
+    private DrinkSize size;
     
-    public Drink(DrinkType type){
+    public Drink(DrinkType type, DrinkSize size){
+        
+        // those types are not available in bottle
+        if(type.equals(DrinkType.TROPICO) || type.equals(DrinkType.MINUTEMAID_MULTI) || type.equals(DrinkType.SHAKURA))
+            if(size.equals(DrinkSize.BOTTLE))
+                    throw new IllegalArgumentException();
+        
         this.type=type;
-        this.setUnitPrice(type.getPrice());
+        this.size=size;
+        this.setUnitPrice(size.equals(DrinkSize.CAN)?type.getPriceCan():type.getPriceBottle());
     }
 
     public DrinkType getType() {
@@ -24,53 +32,71 @@ public class Drink extends Item {
     public void setType(DrinkType type) {
         this.type = type;
     }
+
+    public DrinkSize getSize() {
+        return size;
+    }
+
+    public void setSize(DrinkSize size) {
+        this.size = size;
+    }
+    
+    
     
     public enum DrinkType{
-       COCACOLA_CAN(1.5, "Coca Cola Blik"),
-       COCACOLA_BOTTLE(3.0, "Coca Cola Fles"),
+       COCACOLA(1.5, 3.0, "Coca Cola"),
+       COCACOLA_LIGHT(1.5, 3.0, "Coca Cola Light"),
+       FANTA(1.5, 3.0, "Fanta"),
+       SPRITE(1.5, 3.0, "Sprite"),
+       ICETEA(1.5, 3.0, "Ice tea"),
+       CHAUDFONTAINE(1.5, 3.0, "Chaudfontaine plat"),
+       CHAUDFONTAINE_SPARKLING(1.5, 3.0, "Chaudfontaine bruis"),
        
-       COCACOLA_LIGHT_CAN(1.5, "Coca Cola Light Blik"),
-       COCACOLA_LIGHT_BOTTLE(3.0, "Coca Cola Light Fles"),
-       
-       FANTA_CAN(1.5, "Fanta Blik"),
-       FANTA_BOTTLE(3.0, "Fanta Fles"),
-       
-       SPRITE_CAN(1.5, "Sprite Blik"),
-       SPRITE_BOTTLE(3.0, "Sprite Fles"),
-       
-       ICETEA_CAN(1.5, "Ice tea Blik"),
-       ICETEA_BOTTLE(3.0, "Ice tea Fles"),
-       
-       CHAUDFONTAINE_CAN(1.5, "Chaudfontaine plat Blik"),
-       CHAUDFONTAINE_BOTTLE(3.0, "Chaudfontaine plat Fles"),
-       
-       CHAUDFONTAINE_SPARKLING_CAN(1.5, "Chaudfontaine bruis Blik"),
-       CHAUDFONTAINE_SPARKLING_BOTTLE(3.0, "Chaudfontaine bruis Fles"),
-       
-       TROPICO_CAN(1.5, "Tropico"),
-       MINUTEMAID_MULTI_CAN(1.5, "Minute Maid Multi"),
-       SHAKURA_CAN(2.0, "Shakura");
+       // no bottle
+       TROPICO(1.5, 0.0, "Tropico"),
+       MINUTEMAID_MULTI(1.5, 0.0, "Minute Maid Multi"),
+       SHAKURA(2.0, 0.0, "Shakura");
         
-        private double price;
+        private double priceCan;
+        private double priceBottle;
         private String nameDisplay;
-        DrinkType(double price, String nameDisplay){
-            this.price=price;
+        DrinkType(double priceCan, double priceBottle, String nameDisplay){
+            this.priceCan=priceCan;
+            this.priceBottle=priceBottle;
             this.nameDisplay=nameDisplay;
         }
-        
-        public double getPrice(){
-            return price;
+
+        public double getPriceCan() {
+            return priceCan;
+        }
+
+        public double getPriceBottle() {
+            return priceBottle;
         }
 
         public String getNameDisplay() {
             return nameDisplay;
         }
+    }
+    
+    public enum DrinkSize{
+        CAN("Blik"),
+        BOTTLE("Fles");
+        
+        DrinkSize(String nameDisplay){
+            this.nameDisplay=nameDisplay;
+        }
         
         
+        private String nameDisplay;
+        
+        public String getNameDisplay() {
+            return nameDisplay;
+        }
     }
     
     @Override
     public String toString() {
-        return this.getType().getNameDisplay();
+        return this.getType().getNameDisplay() + " " + this.getSize().getNameDisplay();
     }
 }

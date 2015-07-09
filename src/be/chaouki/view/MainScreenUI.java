@@ -7,7 +7,9 @@ package be.chaouki.view;
 
 import be.chaouki.model.*;
 import be.chaouki.model.ClassicPizza.ClassicPizzaType;
+import be.chaouki.model.CustomPizza.PizzaExtra;
 import be.chaouki.model.Dessert.DessertType;
+import be.chaouki.model.Drink.DrinkSize;
 import be.chaouki.model.Drink.DrinkType;
 import be.chaouki.model.Pasta.PastaType;
 import be.chaouki.model.Pizza.PizzaSize;
@@ -15,7 +17,11 @@ import be.chaouki.model.SideDish.SideDishType;
 import java.awt.Component;
 import java.text.NumberFormat;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
@@ -45,8 +51,8 @@ public class MainScreenUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroupA = new javax.swing.ButtonGroup();
+        buttonGroupB = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -73,6 +79,66 @@ public class MainScreenUI extends javax.swing.JFrame {
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        normalPizzaButton1 = new javax.swing.JToggleButton();
+        BigPizzaButton1 = new javax.swing.JToggleButton();
+        goButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        goudaSpinner = new javax.swing.JSpinner();
+        mozzaSpinner = new javax.swing.JSpinner();
+        fetaSpinner = new javax.swing.JSpinner();
+        gorgonSpinner = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        kipSpinner = new javax.swing.JSpinner();
+        hamSpinner = new javax.swing.JSpinner();
+        pepperoniSpinner = new javax.swing.JSpinner();
+        gehaktSpinner = new javax.swing.JSpinner();
+        meatballsSpinner = new javax.swing.JSpinner();
+        jLabel17 = new javax.swing.JLabel();
+        uiSpin = new javax.swing.JSpinner();
+        paprikaSpin = new javax.swing.JSpinner();
+        chilipepersSpin = new javax.swing.JSpinner();
+        champignonsSpin = new javax.swing.JSpinner();
+        tomatenSpin = new javax.swing.JSpinner();
+        olijvenSpin = new javax.swing.JSpinner();
+        ananasSpin = new javax.swing.JSpinner();
+        jLabel25 = new javax.swing.JLabel();
+        goudaButton = new javax.swing.JButton();
+        mozzaButton = new javax.swing.JButton();
+        fetaButton = new javax.swing.JButton();
+        gorgonButton = new javax.swing.JButton();
+        kipButton = new javax.swing.JButton();
+        hamButton = new javax.swing.JButton();
+        gehaktButton = new javax.swing.JButton();
+        pepperoniButton = new javax.swing.JButton();
+        meatballsButton = new javax.swing.JButton();
+        uiBtt = new javax.swing.JButton();
+        paprikaBtt = new javax.swing.JButton();
+        champignonsBtt = new javax.swing.JButton();
+        chilipepersBtt = new javax.swing.JButton();
+        tomatenBtt = new javax.swing.JButton();
+        olijvenBtt = new javax.swing.JButton();
+        ananasBtt = new javax.swing.JButton();
+        zeevruchtenBtt = new javax.swing.JButton();
+        zeevruchtenSpin = new javax.swing.JSpinner();
+        tonijnBtt = new javax.swing.JButton();
+        tonijnSpin = new javax.swing.JSpinner();
+        scampiBtt = new javax.swing.JButton();
+        scampiSpin = new javax.swing.JSpinner();
+        jLabel26 = new javax.swing.JLabel();
+        bologneseSauceBtt = new javax.swing.JButton();
+        bologneseSauceSpin = new javax.swing.JSpinner();
+        tomatenSauceBtt = new javax.swing.JButton();
+        tomatenSauceSpin = new javax.swing.JSpinner();
+        looksausBtt = new javax.swing.JButton();
+        looksausSpin = new javax.swing.JSpinner();
+        andalouseSauceBtt = new javax.swing.JButton();
+        andalouseSauceSpin = new javax.swing.JSpinner();
+        bbqSauceBtt = new javax.swing.JButton();
+        zoetzureSauceBtt = new javax.swing.JButton();
+        zoetzureSauceSpin = new javax.swing.JSpinner();
+        bbqSauceSpin = new javax.swing.JSpinner();
         jPanel3 = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
@@ -123,12 +189,17 @@ public class MainScreenUI extends javax.swing.JFrame {
         QttButton10 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        totalPriceTextField = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         delButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        priceTextField = new javax.swing.JTextField();
+        discountTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PizzaMenu");
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -151,12 +222,12 @@ public class MainScreenUI extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup2.add(normalPizzaButton);
+        buttonGroupA.add(normalPizzaButton);
         normalPizzaButton.setSelected(true);
         normalPizzaButton.setText("Normaal");
         normalPizzaButton.setToolTipText("");
 
-        buttonGroup2.add(BigPizzaButton);
+        buttonGroupA.add(BigPizzaButton);
         BigPizzaButton.setText("Groot");
 
         jButton2.setText("Prosciutto");
@@ -294,7 +365,6 @@ public class MainScreenUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                    .addComponent(normalPizzaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -303,26 +373,29 @@ public class MainScreenUI extends javax.swing.JFrame {
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 92, Short.MAX_VALUE)
+                .addGap(18, 141, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                     .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BigPizzaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))
                     .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(normalPizzaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BigPizzaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(normalPizzaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BigPizzaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -364,20 +437,505 @@ public class MainScreenUI extends javax.swing.JFrame {
                     .addComponent(jButton19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton10)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Pizza Classic", jPanel1);
+
+        buttonGroupB.add(normalPizzaButton1);
+        normalPizzaButton1.setSelected(true);
+        normalPizzaButton1.setText("Normaal");
+        normalPizzaButton1.setToolTipText("");
+
+        buttonGroupB.add(BigPizzaButton1);
+        BigPizzaButton1.setText("Groot");
+
+        goButton.setText("Go");
+        goButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Kass");
+
+        goudaSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        mozzaSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        fetaSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        gorgonSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Vlees");
+
+        kipSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        hamSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        pepperoniSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        gehaktSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        meatballsSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setText("Groenten");
+
+        uiSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        paprikaSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        chilipepersSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        champignonsSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        tomatenSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        olijvenSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        ananasSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel25.setText("Vis");
+
+        goudaButton.setText("gouda");
+        goudaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goudaButtonActionPerformed(evt);
+            }
+        });
+
+        mozzaButton.setText("mozzarella");
+        mozzaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mozzaButtonActionPerformed(evt);
+            }
+        });
+
+        fetaButton.setText("feta");
+        fetaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fetaButtonActionPerformed(evt);
+            }
+        });
+
+        gorgonButton.setText("gorgonzola");
+        gorgonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gorgonButtonActionPerformed(evt);
+            }
+        });
+
+        kipButton.setText("kip");
+        kipButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kipButtonActionPerformed(evt);
+            }
+        });
+
+        hamButton.setText("ham");
+        hamButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hamButtonActionPerformed(evt);
+            }
+        });
+
+        gehaktButton.setText("gehakt");
+        gehaktButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gehaktButtonActionPerformed(evt);
+            }
+        });
+
+        pepperoniButton.setText("pepperoni");
+        pepperoniButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pepperoniButtonActionPerformed(evt);
+            }
+        });
+
+        meatballsButton.setText("spicy meatballs");
+        meatballsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meatballsButtonActionPerformed(evt);
+            }
+        });
+
+        uiBtt.setText("ui");
+        uiBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uiBttActionPerformed(evt);
+            }
+        });
+
+        paprikaBtt.setText("paprika");
+        paprikaBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paprikaBttActionPerformed(evt);
+            }
+        });
+
+        champignonsBtt.setText("champignons");
+        champignonsBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                champignonsBttActionPerformed(evt);
+            }
+        });
+
+        chilipepersBtt.setText("groene chilipepers");
+        chilipepersBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chilipepersBttActionPerformed(evt);
+            }
+        });
+
+        tomatenBtt.setText("tomaten");
+        tomatenBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tomatenBttActionPerformed(evt);
+            }
+        });
+
+        olijvenBtt.setText("olijven");
+        olijvenBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                olijvenBttActionPerformed(evt);
+            }
+        });
+
+        ananasBtt.setText("ananas");
+        ananasBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ananasBttActionPerformed(evt);
+            }
+        });
+
+        zeevruchtenBtt.setText("zeevruchten");
+        zeevruchtenBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zeevruchtenBttActionPerformed(evt);
+            }
+        });
+
+        zeevruchtenSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        tonijnBtt.setText("tonijn");
+        tonijnBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tonijnBttActionPerformed(evt);
+            }
+        });
+
+        tonijnSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        scampiBtt.setText("scampi");
+        scampiBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scampiBttActionPerformed(evt);
+            }
+        });
+
+        scampiSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel26.setText("Sauzen");
+
+        bologneseSauceBtt.setText("bolognese");
+        bologneseSauceBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bologneseSauceBttActionPerformed(evt);
+            }
+        });
+
+        bologneseSauceSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        tomatenSauceBtt.setText("tomaten");
+        tomatenSauceBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tomatenSauceBttActionPerformed(evt);
+            }
+        });
+
+        tomatenSauceSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        looksausBtt.setText("looksaus");
+        looksausBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                looksausBttActionPerformed(evt);
+            }
+        });
+
+        looksausSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        andalouseSauceBtt.setText("andalouse");
+        andalouseSauceBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                andalouseSauceBttActionPerformed(evt);
+            }
+        });
+
+        andalouseSauceSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        bbqSauceBtt.setText("bbq");
+        bbqSauceBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bbqSauceBttActionPerformed(evt);
+            }
+        });
+
+        zoetzureSauceBtt.setText("zoetzure");
+        zoetzureSauceBtt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zoetzureSauceBttActionPerformed(evt);
+            }
+        });
+
+        zoetzureSauceSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        bbqSauceSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(kipButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hamSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kipSpinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(gehaktButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pepperoniButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pepperoniSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(gehaktSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(meatballsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(meatballsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(goudaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mozzaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mozzaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(goudaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fetaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gorgonButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fetaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(gorgonSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel26)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(ananasBtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(paprikaBtt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                            .addComponent(uiBtt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ananasSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(uiSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(paprikaSpin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(champignonsBtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chilipepersBtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(chilipepersSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(olijvenBtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0)
+                                .addComponent(olijvenSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(champignonsSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tomatenBtt)
+                                .addGap(0, 0, 0)
+                                .addComponent(tomatenSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                .addComponent(bologneseSauceBtt)
+                                .addGap(0, 0, 0)
+                                .addComponent(bologneseSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(andalouseSauceBtt)
+                                .addGap(0, 0, 0)
+                                .addComponent(andalouseSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tomatenSauceBtt, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addComponent(bbqSauceBtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(bbqSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(zoetzureSauceBtt, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(tomatenSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(looksausBtt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(zoetzureSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(looksausSpin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(zeevruchtenBtt)
+                        .addGap(0, 0, 0)
+                        .addComponent(zeevruchtenSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tonijnBtt)
+                        .addGap(0, 0, 0)
+                        .addComponent(tonijnSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(scampiBtt)
+                        .addGap(0, 0, 0)
+                        .addComponent(scampiSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(goudaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fetaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goudaButton)
+                    .addComponent(fetaButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mozzaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gorgonSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mozzaButton)
+                    .addComponent(gorgonButton))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(kipSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gehaktSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(meatballsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kipButton)
+                    .addComponent(gehaktButton)
+                    .addComponent(meatballsButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hamSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pepperoniSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hamButton)
+                    .addComponent(pepperoniButton))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uiSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(champignonsSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tomatenSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uiBtt)
+                    .addComponent(champignonsBtt)
+                    .addComponent(tomatenBtt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(paprikaSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chilipepersSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(olijvenSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paprikaBtt)
+                    .addComponent(chilipepersBtt)
+                    .addComponent(olijvenBtt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ananasSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ananasBtt))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(zeevruchtenBtt)
+                    .addComponent(zeevruchtenSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tonijnBtt)
+                    .addComponent(tonijnSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scampiBtt)
+                    .addComponent(scampiSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bologneseSauceBtt)
+                    .addComponent(bologneseSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tomatenSauceBtt)
+                    .addComponent(tomatenSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(looksausBtt)
+                    .addComponent(looksausSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(andalouseSauceBtt)
+                    .addComponent(andalouseSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bbqSauceBtt)
+                    .addComponent(zoetzureSauceBtt)
+                    .addComponent(zoetzureSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bbqSauceSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(jPanel10);
+
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(normalPizzaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BigPizzaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(goButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(normalPizzaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BigPizzaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Pizza Custom", jPanel2);
@@ -457,7 +1015,7 @@ public class MainScreenUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+                .addContainerGap(187, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -513,7 +1071,7 @@ public class MainScreenUI extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,7 +1095,7 @@ public class MainScreenUI extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(129, Short.MAX_VALUE)
                 .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -709,7 +1267,7 @@ public class MainScreenUI extends javax.swing.JFrame {
                             .addComponent(jButton41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton46, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                        .addContainerGap(54, Short.MAX_VALUE))
+                        .addContainerGap(103, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
@@ -785,7 +1343,6 @@ public class MainScreenUI extends javax.swing.JFrame {
         jPanel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         QttButton1.setText("1");
-        buttonGroup1.add(QttButton1);
         QttButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QttButton1ActionPerformed(evt);
@@ -860,7 +1417,7 @@ public class MainScreenUI extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(125, 125, 125)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(QttButton1)
@@ -908,9 +1465,9 @@ public class MainScreenUI extends javax.swing.JFrame {
 
         jLabel1.setText("Totaal Prijs:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setColumns(10);
-        jTextField1.setText("0.00 €");
+        totalPriceTextField.setEditable(false);
+        totalPriceTextField.setColumns(10);
+        totalPriceTextField.setText("0.00 €");
 
         addButton.setText("toevoegen");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -933,11 +1490,22 @@ public class MainScreenUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Prijs:");
+
+        jLabel5.setText("Korting");
+
+        priceTextField.setEditable(false);
+        priceTextField.setText("0.00 €");
+
+        discountTextField.setEditable(false);
+        discountTextField.setText("0.00 €");
+        discountTextField.setToolTipText("");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -945,22 +1513,40 @@ public class MainScreenUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(totalPriceTextField)
+                    .addComponent(discountTextField)
+                    .addComponent(priceTextField))
                 .addGap(57, 57, 57))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(discountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -970,9 +1556,9 @@ public class MainScreenUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTabbedPane1)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
@@ -1011,8 +1597,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.removeLine(rowInd);
         
         tableModel.fireTableDataChanged();
@@ -1025,12 +1613,18 @@ public class MainScreenUI extends javax.swing.JFrame {
         tableModel.fireTableDataChanged();
         updateRowHeights(jTable);
         updateTotalPrice();
+        
+        // also revet to normal position the pizza size buttons
+        normalPizzaButton.setSelected(true);
+        normalPizzaButton1.setSelected(true);
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void QttButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton1ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd, 1);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1038,8 +1632,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton2ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,2);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1047,8 +1643,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton3ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,3);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1056,8 +1654,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton4ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,4);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1065,8 +1665,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton5ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,5);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1074,8 +1676,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton6ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,6);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1083,8 +1687,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton17ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,7);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1092,8 +1698,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton8ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,8);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1101,8 +1709,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton9ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,9);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1110,8 +1720,10 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     private void QttButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton10ActionPerformed
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         tableModel.setQtt(rowInd,10);
         tableModel.fireTableRowsUpdated(rowInd, rowInd);
         updateTotalPrice();
@@ -1238,71 +1850,71 @@ public class MainScreenUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
-        setItem(DrinkType.COCACOLA_CAN);
+        setItem(DrinkType.COCACOLA, DrinkSize.CAN); 
     }//GEN-LAST:event_jButton30ActionPerformed
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
-        setItem(DrinkType.COCACOLA_BOTTLE);
+        setItem(DrinkType.COCACOLA, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton31ActionPerformed
 
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
-        setItem(DrinkType.COCACOLA_LIGHT_CAN);
+        setItem(DrinkType.COCACOLA_LIGHT, DrinkSize.CAN);
     }//GEN-LAST:event_jButton32ActionPerformed
 
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        setItem(DrinkType.COCACOLA_LIGHT_BOTTLE);
+        setItem(DrinkType.COCACOLA_LIGHT, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
-        setItem(DrinkType.FANTA_CAN);
+        setItem(DrinkType.FANTA, DrinkSize.CAN);
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
-        setItem(DrinkType.FANTA_BOTTLE);
+        setItem(DrinkType.FANTA, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton42ActionPerformed
 
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
-        setItem(DrinkType.SPRITE_CAN);
+        setItem(DrinkType.SPRITE, DrinkSize.CAN);
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        setItem(DrinkType.SPRITE_BOTTLE);
+        setItem(DrinkType.SPRITE, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton43ActionPerformed
 
     private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
-        setItem(DrinkType.ICETEA_CAN);
+        setItem(DrinkType.ICETEA, DrinkSize.CAN);
     }//GEN-LAST:event_jButton35ActionPerformed
 
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
-        setItem(DrinkType.ICETEA_BOTTLE);
+        setItem(DrinkType.ICETEA, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton44ActionPerformed
 
     private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
-        setItem(DrinkType.CHAUDFONTAINE_CAN);
+        setItem(DrinkType.CHAUDFONTAINE, DrinkSize.CAN);
     }//GEN-LAST:event_jButton36ActionPerformed
 
     private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
-        setItem(DrinkType.CHAUDFONTAINE_BOTTLE);
+        setItem(DrinkType.CHAUDFONTAINE, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton45ActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-        setItem(DrinkType.CHAUDFONTAINE_SPARKLING_CAN);
+        setItem(DrinkType.CHAUDFONTAINE_SPARKLING, DrinkSize.CAN);
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
-        setItem(DrinkType.CHAUDFONTAINE_SPARKLING_BOTTLE);
+        setItem(DrinkType.CHAUDFONTAINE_SPARKLING, DrinkSize.BOTTLE);
     }//GEN-LAST:event_jButton46ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
-        setItem(DrinkType.TROPICO_CAN);
+        setItem(DrinkType.TROPICO, DrinkSize.CAN);
     }//GEN-LAST:event_jButton38ActionPerformed
 
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
-        setItem(DrinkType.MINUTEMAID_MULTI_CAN);
+        setItem(DrinkType.MINUTEMAID_MULTI, DrinkSize.CAN);
     }//GEN-LAST:event_jButton39ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
-        setItem(DrinkType.SHAKURA_CAN);
+        setItem(DrinkType.SHAKURA, DrinkSize.CAN);
     }//GEN-LAST:event_jButton40ActionPerformed
 
     private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton47ActionPerformed
@@ -1314,8 +1926,172 @@ public class MainScreenUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton48ActionPerformed
 
     private void jTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTablePropertyChange
-        System.out.println(evt.getPropertyName());
+        updateTotalPrice();
     }//GEN-LAST:event_jTablePropertyChange
+
+    private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
+        int rowInd=jTable.getSelectedRow();
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
+            return;
+        }
+        
+        PizzaSize pizzaSize=(normalPizzaButton1.isSelected())?PizzaSize.NORMAL:PizzaSize.BIG;
+        HashMap<PizzaExtra, Integer> extraQtt =new HashMap();
+        
+        // fill the map with the extras' quatntities and reset the spinners
+        // cheese
+        addToMapAndReset(extraQtt, PizzaExtra.GOUDA, goudaSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.MOZZARELLA, mozzaSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.FETA, fetaSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.GORGONZOLAKAAS, gorgonSpinner);
+        
+        // meat
+        addToMapAndReset(extraQtt, PizzaExtra.KIP, kipSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.HAM, hamSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.GEHAKT, gehaktSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.PEPPERONI, pepperoniSpinner);
+        addToMapAndReset(extraQtt, PizzaExtra.SPICY_MEATBALLS, meatballsSpinner);
+        
+        // Vegetables
+        addToMapAndReset(extraQtt, PizzaExtra.UI, uiSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.PAPRIKA, paprikaSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.CHAMPIGNONS, champignonsSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.GROENE_CHILIPEPERS, chilipepersSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.TOMATEN, tomatenSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.OLIJVEN, olijvenSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.ANANAS, ananasSpin);
+        
+        // Fish
+        addToMapAndReset(extraQtt, PizzaExtra.ZEEVRUCHTEN, zeevruchtenSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.TONIJN, tonijnSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.SCAMPI, scampiSpin);
+        
+        // Sauce
+        addToMapAndReset(extraQtt, PizzaExtra.BOLOGNESESAUS, bologneseSauceSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.TOMATENSAUS, tomatenSauceSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.LOOKSAUS, looksausSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.ANDALOUSE, andalouseSauceSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.BBQ_SAUS, bbqSauceSpin);
+        addToMapAndReset(extraQtt, PizzaExtra.ZOETZURE_SAUS, zoetzureSauceSpin);
+        
+        tableModel.setItem(rowInd, new CustomPizza(extraQtt, pizzaSize));
+        
+        // put the pizza size back to "normal"
+        normalPizzaButton1.setSelected(true);
+        
+        updateRowHeights(jTable);
+        updateTotalPrice();
+    }//GEN-LAST:event_goButtonActionPerformed
+    private void addToMapAndReset(HashMap<PizzaExtra, Integer> map, PizzaExtra extra, JSpinner spinner){
+        if((Integer)spinner.getModel().getValue()>0)
+            map.put(extra, (Integer) spinner.getModel().getValue());
+        spinner.getModel().setValue(0);
+    }
+    
+    private void incSpinner(JSpinner spinner){
+        if((Integer)spinner.getModel().getValue()<9) // values should be in [0, 9]
+            spinner.getModel().setValue(spinner.getModel().getNextValue());
+    }
+    private void goudaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goudaButtonActionPerformed
+        incSpinner(goudaSpinner);
+    }//GEN-LAST:event_goudaButtonActionPerformed
+
+    private void mozzaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mozzaButtonActionPerformed
+        incSpinner(mozzaSpinner);
+    }//GEN-LAST:event_mozzaButtonActionPerformed
+
+    private void fetaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fetaButtonActionPerformed
+        incSpinner(fetaSpinner);
+    }//GEN-LAST:event_fetaButtonActionPerformed
+
+    private void gorgonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gorgonButtonActionPerformed
+        incSpinner(gorgonSpinner);
+    }//GEN-LAST:event_gorgonButtonActionPerformed
+
+    private void kipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kipButtonActionPerformed
+        incSpinner(kipSpinner);
+    }//GEN-LAST:event_kipButtonActionPerformed
+
+    private void gehaktButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gehaktButtonActionPerformed
+        incSpinner(gehaktSpinner);
+    }//GEN-LAST:event_gehaktButtonActionPerformed
+
+    private void meatballsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meatballsButtonActionPerformed
+        incSpinner(meatballsSpinner);
+    }//GEN-LAST:event_meatballsButtonActionPerformed
+
+    private void hamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hamButtonActionPerformed
+        incSpinner(hamSpinner);
+    }//GEN-LAST:event_hamButtonActionPerformed
+
+    private void pepperoniButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pepperoniButtonActionPerformed
+        incSpinner(pepperoniSpinner);
+    }//GEN-LAST:event_pepperoniButtonActionPerformed
+
+    private void uiBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uiBttActionPerformed
+        incSpinner(uiSpin);
+    }//GEN-LAST:event_uiBttActionPerformed
+
+    private void champignonsBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_champignonsBttActionPerformed
+        incSpinner(champignonsSpin);
+    }//GEN-LAST:event_champignonsBttActionPerformed
+
+    private void tomatenBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tomatenBttActionPerformed
+        incSpinner(tomatenSpin);
+    }//GEN-LAST:event_tomatenBttActionPerformed
+
+    private void paprikaBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paprikaBttActionPerformed
+        incSpinner(paprikaSpin);
+    }//GEN-LAST:event_paprikaBttActionPerformed
+
+    private void chilipepersBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chilipepersBttActionPerformed
+        incSpinner(chilipepersSpin);
+    }//GEN-LAST:event_chilipepersBttActionPerformed
+
+    private void olijvenBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_olijvenBttActionPerformed
+        incSpinner(olijvenSpin);
+    }//GEN-LAST:event_olijvenBttActionPerformed
+
+    private void ananasBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ananasBttActionPerformed
+        incSpinner(ananasSpin);
+    }//GEN-LAST:event_ananasBttActionPerformed
+
+    private void zeevruchtenBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeevruchtenBttActionPerformed
+        incSpinner(zeevruchtenSpin);
+    }//GEN-LAST:event_zeevruchtenBttActionPerformed
+
+    private void tonijnBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tonijnBttActionPerformed
+        incSpinner(tonijnSpin);
+    }//GEN-LAST:event_tonijnBttActionPerformed
+
+    private void scampiBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scampiBttActionPerformed
+        incSpinner(scampiSpin);
+    }//GEN-LAST:event_scampiBttActionPerformed
+
+    private void bologneseSauceBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bologneseSauceBttActionPerformed
+        incSpinner(bologneseSauceSpin);
+    }//GEN-LAST:event_bologneseSauceBttActionPerformed
+
+    private void tomatenSauceBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tomatenSauceBttActionPerformed
+        incSpinner(tomatenSauceSpin);
+    }//GEN-LAST:event_tomatenSauceBttActionPerformed
+
+    private void looksausBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_looksausBttActionPerformed
+        incSpinner(looksausSpin);
+    }//GEN-LAST:event_looksausBttActionPerformed
+
+    private void andalouseSauceBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andalouseSauceBttActionPerformed
+        incSpinner(andalouseSauceSpin);
+    }//GEN-LAST:event_andalouseSauceBttActionPerformed
+
+    private void bbqSauceBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbqSauceBttActionPerformed
+        incSpinner(bbqSauceSpin);
+    }//GEN-LAST:event_bbqSauceBttActionPerformed
+
+    private void zoetzureSauceBttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoetzureSauceBttActionPerformed
+        incSpinner(zoetzureSauceSpin);
+    }//GEN-LAST:event_zoetzureSauceBttActionPerformed
 
     private void updateRowHeights(JTable table) {
         try {
@@ -1349,16 +2125,32 @@ public class MainScreenUI extends javax.swing.JFrame {
     }
 
     private void updateTotalPrice() {
-        double price=tableModel.getTotalPrice();
         NumberFormat nf=NumberFormat.getCurrencyInstance();
         nf.setMaximumFractionDigits(2);
-        jTextField1.setText(nf.format(price));
+        
+        // total price
+        double totalPrice=tableModel.getTotalPrice();
+        totalPriceTextField.setText(nf.format(totalPrice));
+        
+        // price
+        double price=tableModel.getTotalPriceBefore();
+        priceTextField.setText(nf.format(price));
+        
+        // discount
+        double discount=tableModel.getDiscount();
+        discountTextField.setText(nf.format(discount));
+    }
+    
+    private void setItem(Enum itemType) {
+        setItem(itemType, null);
     }
 
-    private void setItem(Enum itemType) {
+    private void setItem(Enum itemType, Enum itemSize) {
         int rowInd=jTable.getSelectedRow();
-        if(rowInd==-1)
+        if(rowInd==-1){
+            JOptionPane.showMessageDialog(null, "No line selected");
             return;
+        }
         
         if(itemType instanceof ClassicPizzaType){
             PizzaSize pizzaSize=(normalPizzaButton.isSelected())?PizzaSize.NORMAL:PizzaSize.BIG;
@@ -1366,19 +2158,20 @@ public class MainScreenUI extends javax.swing.JFrame {
         } else if(itemType instanceof SideDishType){
             tableModel.setItem(rowInd, new SideDish((SideDishType)itemType));
         } else if(itemType instanceof DrinkType){
-            tableModel.setItem(rowInd, new Drink((DrinkType)itemType));
+            tableModel.setItem(rowInd, new Drink((DrinkType)itemType, (DrinkSize) itemSize));
         } else if(itemType instanceof DessertType){
             tableModel.setItem(rowInd, new Dessert((DessertType)itemType));
         } else if(itemType instanceof PastaType){
             tableModel.setItem(rowInd, new Pasta((PastaType)itemType));
         } 
         
-
         //        tableModel.fireTableDataChanged();
         //        tableModel.fireTableRowsInserted(1, 1);
         updateRowHeights(jTable);
         updateTotalPrice();
     }
+    
+    
 
     private static class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
@@ -1417,6 +2210,7 @@ public class MainScreenUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BigPizzaButton;
+    private javax.swing.JToggleButton BigPizzaButton1;
     private javax.swing.JButton QttButton1;
     private javax.swing.JButton QttButton10;
     private javax.swing.JButton QttButton17;
@@ -1428,9 +2222,33 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JButton QttButton8;
     private javax.swing.JButton QttButton9;
     private javax.swing.JButton addButton;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton ananasBtt;
+    private javax.swing.JSpinner ananasSpin;
+    private javax.swing.JButton andalouseSauceBtt;
+    private javax.swing.JSpinner andalouseSauceSpin;
+    private javax.swing.JButton bbqSauceBtt;
+    private javax.swing.JSpinner bbqSauceSpin;
+    private javax.swing.JButton bologneseSauceBtt;
+    private javax.swing.JSpinner bologneseSauceSpin;
+    private javax.swing.ButtonGroup buttonGroupA;
+    private javax.swing.ButtonGroup buttonGroupB;
+    private javax.swing.JButton champignonsBtt;
+    private javax.swing.JSpinner champignonsSpin;
+    private javax.swing.JButton chilipepersBtt;
+    private javax.swing.JSpinner chilipepersSpin;
     private javax.swing.JButton delButton;
+    private javax.swing.JTextField discountTextField;
+    private javax.swing.JButton fetaButton;
+    private javax.swing.JSpinner fetaSpinner;
+    private javax.swing.JButton gehaktButton;
+    private javax.swing.JSpinner gehaktSpinner;
+    private javax.swing.JButton goButton;
+    private javax.swing.JButton gorgonButton;
+    private javax.swing.JSpinner gorgonSpinner;
+    private javax.swing.JButton goudaButton;
+    private javax.swing.JSpinner goudaSpinner;
+    private javax.swing.JButton hamButton;
+    private javax.swing.JSpinner hamSpinner;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1480,9 +2298,17 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1492,11 +2318,42 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton kipButton;
+    private javax.swing.JSpinner kipSpinner;
+    private javax.swing.JButton looksausBtt;
+    private javax.swing.JSpinner looksausSpin;
+    private javax.swing.JButton meatballsButton;
+    private javax.swing.JSpinner meatballsSpinner;
+    private javax.swing.JButton mozzaButton;
+    private javax.swing.JSpinner mozzaSpinner;
     private javax.swing.JToggleButton normalPizzaButton;
+    private javax.swing.JToggleButton normalPizzaButton1;
+    private javax.swing.JButton olijvenBtt;
+    private javax.swing.JSpinner olijvenSpin;
+    private javax.swing.JButton paprikaBtt;
+    private javax.swing.JSpinner paprikaSpin;
+    private javax.swing.JButton pepperoniButton;
+    private javax.swing.JSpinner pepperoniSpinner;
+    private javax.swing.JTextField priceTextField;
     private javax.swing.JButton resetButton;
+    private javax.swing.JButton scampiBtt;
+    private javax.swing.JSpinner scampiSpin;
+    private javax.swing.JButton tomatenBtt;
+    private javax.swing.JButton tomatenSauceBtt;
+    private javax.swing.JSpinner tomatenSauceSpin;
+    private javax.swing.JSpinner tomatenSpin;
+    private javax.swing.JButton tonijnBtt;
+    private javax.swing.JSpinner tonijnSpin;
+    private javax.swing.JTextField totalPriceTextField;
+    private javax.swing.JButton uiBtt;
+    private javax.swing.JSpinner uiSpin;
+    private javax.swing.JButton zeevruchtenBtt;
+    private javax.swing.JSpinner zeevruchtenSpin;
+    private javax.swing.JButton zoetzureSauceBtt;
+    private javax.swing.JSpinner zoetzureSauceSpin;
     // End of variables declaration//GEN-END:variables
 }

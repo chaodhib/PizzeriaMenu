@@ -31,6 +31,13 @@ public abstract class Pizza extends Item {
         public String getNameDisplay() {
             return nameDisplay;
         }
+
+        @Override
+        public String toString() {
+            return nameDisplay;
+        }
+        
+        
     }
 }
 

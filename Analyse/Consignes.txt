@@ -1,0 +1,6 @@
+consigne:
+
+* doit pouvoir composer un menu et etre capable de gerer tout type de menu prévu par le dépliant.
+* doit stocké les info clients (tout en évitant d'avoir à installer un logiciel de DB sur la machine du client).
+* doit pouvoir imprimer le menu à la fin de la composition.
+* doit pouvoir automatiquement gérer les réductions.
