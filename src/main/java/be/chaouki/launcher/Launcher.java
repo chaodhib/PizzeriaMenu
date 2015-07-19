@@ -6,9 +6,15 @@
 package be.chaouki.launcher;
 
 import be.chaouki.view.MainScreenUI;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,6 +26,7 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

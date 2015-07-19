@@ -9,7 +9,7 @@ package be.chaouki.model;
  *
  * @author chaouki
  */
-abstract class Item {
+public abstract class Item {
     private double unitPrice;
 
     public double getUnitPrice() {

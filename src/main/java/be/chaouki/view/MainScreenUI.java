@@ -5,28 +5,43 @@
  */
 package be.chaouki.view;
 
-import be.chaouki.model.*;
-import be.chaouki.model.ClassicPizza.ClassicPizzaType;
-import be.chaouki.model.CustomPizza.PizzaExtra;
-import be.chaouki.model.Dessert.DessertType;
-import be.chaouki.model.Drink.DrinkSize;
-import be.chaouki.model.Drink.DrinkType;
-import be.chaouki.model.Pasta.PastaType;
-import be.chaouki.model.Pizza.PizzaSize;
-import be.chaouki.model.SideDish.SideDishType;
 import java.awt.Component;
+import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import be.chaouki.model.ClassicPizza;
+import be.chaouki.model.ClassicPizza.ClassicPizzaType;
+import be.chaouki.model.CustomPizza;
+import be.chaouki.model.CustomPizza.PizzaExtra;
+import be.chaouki.model.Dessert;
+import be.chaouki.model.Dessert.DessertType;
+import be.chaouki.model.Drink;
+import be.chaouki.model.Drink.DrinkSize;
+import be.chaouki.model.Drink.DrinkType;
+import be.chaouki.model.Order;
+import be.chaouki.model.Pasta;
+import be.chaouki.model.Pasta.PastaType;
+import be.chaouki.model.Pizza.PizzaSize;
+import be.chaouki.model.SideDish;
+import be.chaouki.model.SideDish.SideDishType;
+import be.chaouki.report.OrderLineDTO;
 
 /**
  *
@@ -34,7 +49,7 @@ import javax.swing.table.TableColumn;
  */
 public class MainScreenUI extends javax.swing.JFrame {
 
-    private Order tableModel=new be.chaouki.model.Order();
+    private Order tableModel=be.chaouki.model.Order.getInstance();
     /**
      * Creates new form MainScreenUI
      */
@@ -176,6 +191,15 @@ public class MainScreenUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        clientField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        streetField = new javax.swing.JTextField();
+        phoneField = new javax.swing.JTextField();
+        municipalityField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        addressNumberField = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         QttButton1 = new javax.swing.JButton();
         QttButton2 = new javax.swing.JButton();
@@ -197,6 +221,10 @@ public class MainScreenUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         priceTextField = new javax.swing.JTextField();
         discountTextField = new javax.swing.JTextField();
+        printButton = new javax.swing.JButton();
+        discount1CheckBox = new javax.swing.JCheckBox();
+        discount2CheckBox = new javax.swing.JCheckBox();
+        discount3CheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PizzaMenu");
@@ -1329,15 +1357,58 @@ public class MainScreenUI extends javax.swing.JFrame {
 
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel7.setText("Klant:");
+
+        jLabel8.setText("Straat en Nr:");
+
+        jLabel10.setText("Tel:");
+
+        jLabel11.setText("Gemeente:");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel11))
+                .addGap(59, 59, 59)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(streetField, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addressNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(municipalityField))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 208, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clientField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(addressNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(municipalityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1463,6 +1534,7 @@ public class MainScreenUI extends javax.swing.JFrame {
 
         jPanel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Totaal Prijs:");
 
         totalPriceTextField.setEditable(false);
@@ -1490,9 +1562,11 @@ public class MainScreenUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Prijs:");
 
-        jLabel5.setText("Korting");
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Korting:");
 
         priceTextField.setEditable(false);
         priceTextField.setText("0.00 €");
@@ -1500,6 +1574,46 @@ public class MainScreenUI extends javax.swing.JFrame {
         discountTextField.setEditable(false);
         discountTextField.setText("0.00 €");
         discountTextField.setToolTipText("");
+
+        // setting icon of the print button
+        final String PRINT_ICON_PATH="/be/chaouki/image/32px-print.png";
+        java.io.InputStream  stream  = getClass().getResourceAsStream(PRINT_ICON_PATH);
+        if (stream != null) {
+            try {
+                BufferedImage image = ImageIO.read(stream);
+                printButton.setIcon(new ImageIcon(image, ""));
+            } catch (Exception ex) {
+                System.err.println("Couldn't use print icon");
+            }
+        } else {
+            System.err.println("Couldn't find print icon file at " + PRINT_ICON_PATH);
+        }
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
+            }
+        });
+
+        discount1CheckBox.setText("korting 1");
+        discount1CheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discount1CheckBoxActionPerformed(evt);
+            }
+        });
+
+        discount2CheckBox.setText("korting 2");
+        discount2CheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discount2CheckBoxActionPerformed(evt);
+            }
+        });
+
+        discount3CheckBox.setText("korting 3");
+        discount3CheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discount3CheckBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1512,41 +1626,59 @@ public class MainScreenUI extends javax.swing.JFrame {
                 .addComponent(delButton)
                 .addGap(18, 18, 18)
                 .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
+                .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(discount2CheckBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(discount3CheckBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(discount1CheckBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(totalPriceTextField)
                     .addComponent(discountTextField)
-                    .addComponent(priceTextField))
-                .addGap(57, 57, 57))
+                    .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(discountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(26, 26, 26))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(discount1CheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(discount2CheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(discount3CheckBox)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(discountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(26, 26, 26))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1617,6 +1749,14 @@ public class MainScreenUI extends javax.swing.JFrame {
         // also revet to normal position the pizza size buttons
         normalPizzaButton.setSelected(true);
         normalPizzaButton1.setSelected(true);
+        
+        // and revet the discountCheckBoxes
+        discount1CheckBox.setSelected(false);
+        tableModel.setIsDiscount1Applic(false);
+        discount2CheckBox.setSelected(false);
+        tableModel.setIsDiscount2Applic(false);
+        discount3CheckBox.setSelected(false);
+        tableModel.setIsDiscount3Applic(false);
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void QttButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QttButton1ActionPerformed
@@ -2093,6 +2233,60 @@ public class MainScreenUI extends javax.swing.JFrame {
         incSpinner(zoetzureSauceSpin);
     }//GEN-LAST:event_zoetzureSauceBttActionPerformed
 
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
+    	List<OrderLineDTO> dataList = be.chaouki.report.Factory.load();
+    	
+    	// check if the order is not empty or only has blank lines
+    	if(dataList.isEmpty()){
+    		JOptionPane.showMessageDialog(null, "Nothing to print");
+            return;
+    	}
+    	
+    	// print
+		String sourceFileName = "/report.jasper";
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
+
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("CLIENT_NAME", clientField.getText());
+		parameters.put("CLIENT_STREET", streetField.getText());
+		parameters.put("CLIENT_NUMBER", addressNumberField.getText());
+		parameters.put("CLIENT_MUNICIPALITY", municipalityField.getText());
+		parameters.put("CLIENT_PHONE", phoneField.getText());
+		
+		NumberFormat nf=NumberFormat.getCurrencyInstance();
+        nf.setMaximumFractionDigits(2);
+		parameters.put("PRICE_BEFORE", nf.format(tableModel.getTotalPriceBefore()));
+		parameters.put("PRICE_DISCOUNT", nf.format(tableModel.getDiscount()));
+		parameters.put("PRICE_AFTER", nf.format(tableModel.getTotalPrice()));
+                
+		try {
+			JasperPrint jPrint=JasperFillManager.fillReport(getClass().getResourceAsStream(sourceFileName), parameters, beanColDataSource);
+
+			if (jPrint != null) {
+				JasperPrintManager.printReport(jPrint, true);
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+        
+        
+    }//GEN-LAST:event_printButtonActionPerformed
+
+    private void discount1CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discount1CheckBoxActionPerformed
+        tableModel.setIsDiscount1Applic(discount1CheckBox.isSelected());
+        updateTotalPrice();
+    }//GEN-LAST:event_discount1CheckBoxActionPerformed
+
+    private void discount2CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discount2CheckBoxActionPerformed
+        tableModel.setIsDiscount2Applic(discount2CheckBox.isSelected());
+        updateTotalPrice();
+    }//GEN-LAST:event_discount2CheckBoxActionPerformed
+
+    private void discount3CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discount3CheckBoxActionPerformed
+        tableModel.setIsDiscount3Applic(discount3CheckBox.isSelected());
+        updateTotalPrice();
+    }//GEN-LAST:event_discount3CheckBoxActionPerformed
+
     private void updateRowHeights(JTable table) {
         try {
             for (int row = 0; row < table.getRowCount(); row++) {
@@ -2222,6 +2416,7 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JButton QttButton8;
     private javax.swing.JButton QttButton9;
     private javax.swing.JButton addButton;
+    private javax.swing.JTextField addressNumberField;
     private javax.swing.JButton ananasBtt;
     private javax.swing.JSpinner ananasSpin;
     private javax.swing.JButton andalouseSauceBtt;
@@ -2236,7 +2431,11 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JSpinner champignonsSpin;
     private javax.swing.JButton chilipepersBtt;
     private javax.swing.JSpinner chilipepersSpin;
+    private javax.swing.JTextField clientField;
     private javax.swing.JButton delButton;
+    private javax.swing.JCheckBox discount1CheckBox;
+    private javax.swing.JCheckBox discount2CheckBox;
+    private javax.swing.JCheckBox discount3CheckBox;
     private javax.swing.JTextField discountTextField;
     private javax.swing.JButton fetaButton;
     private javax.swing.JSpinner fetaSpinner;
@@ -2298,6 +2497,8 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel25;
@@ -2306,6 +2507,8 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -2330,6 +2533,7 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JSpinner meatballsSpinner;
     private javax.swing.JButton mozzaButton;
     private javax.swing.JSpinner mozzaSpinner;
+    private javax.swing.JTextField municipalityField;
     private javax.swing.JToggleButton normalPizzaButton;
     private javax.swing.JToggleButton normalPizzaButton1;
     private javax.swing.JButton olijvenBtt;
@@ -2338,10 +2542,13 @@ public class MainScreenUI extends javax.swing.JFrame {
     private javax.swing.JSpinner paprikaSpin;
     private javax.swing.JButton pepperoniButton;
     private javax.swing.JSpinner pepperoniSpinner;
+    private javax.swing.JTextField phoneField;
     private javax.swing.JTextField priceTextField;
+    private javax.swing.JButton printButton;
     private javax.swing.JButton resetButton;
     private javax.swing.JButton scampiBtt;
     private javax.swing.JSpinner scampiSpin;
+    private javax.swing.JTextField streetField;
     private javax.swing.JButton tomatenBtt;
     private javax.swing.JButton tomatenSauceBtt;
     private javax.swing.JSpinner tomatenSauceSpin;
