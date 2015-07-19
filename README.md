@@ -15,7 +15,7 @@ Work in progress.
 
 ##Download
 
-The runnable JAR (40 MB) can be downloaded from the release section.
+The runnable JAR (60 MB) can be downloaded from the release section.
 
 ##Screenshoots
 
