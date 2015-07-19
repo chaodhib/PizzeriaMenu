@@ -17,14 +17,18 @@ Work in progress.
 
 The runnable JAR (40 MB) can be downloaded from the release section.
 
-##Requirements
-
-* Oracle JDK 8
-* JasperReports Library 6.1 for the reporting/printing: http://sourceforge.net/projects/jasperreports/files/jasperreports/)
-* Joda Time library
+##Screenshoots
 
 ![screenshot1](http://i.imgur.com/LMQF2h5.png)
 
 ![screenshot2](http://i.imgur.com/e3a9w1u.png)
 
 ![screenshot3](http://i.imgur.com/2AfVjgd.png)
+
+Example of report: https://drive.google.com/open?id=0B9aYPPfb8y3_Uy1vTnRHcWtOdG8
+
+##Requirements
+
+* Oracle JDK 8
+* JasperReports Library 6.1 for the reporting/printing: http://sourceforge.net/projects/jasperreports/files/jasperreports/)
+* Joda Time library
