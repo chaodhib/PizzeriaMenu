@@ -25,7 +25,8 @@ The runnable JAR (60 MB) can be downloaded from the release section.
 
 ![screenshot3](http://i.imgur.com/2AfVjgd.png)
 
-Example of report: https://drive.google.com/open?id=0B9aYPPfb8y3_Uy1vTnRHcWtOdG8
+Example of report:
+![report](http://i.imgur.com/WKlTdYa.jpg)
 
 ##Requirements
 
