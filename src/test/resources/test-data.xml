@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- dataset entries dont update the "AUTO_INCREMENT" aka "hibernate_sequence"
+therefore, it's important to use a) give PKs to our data. b) give them high
+values of PK so during the test, there is no conflitcs (since, in the test
+no matter how many entries we inject by dataset, the test will start
+persisting data at id=1 -->
+<!-- cf: http://florent-dupont.blogspot.be/2014/01/arquillian-jpa-et-datasets-22-utiliser.html -->
+<dataset>
+	<CUSTOMER id="500" name="customerTest" />
+	<CUSTOMER id="501" name="customerTest2" /> 
+</dataset>

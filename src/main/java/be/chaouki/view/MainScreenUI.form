@@ -8,13 +8,17 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="PizzaMenu"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -2054,7 +2058,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// setting icon of the print button&#xd;&#xa;final String PRINT_ICON_PATH=&quot;/be/chaouki/icons/32px-print.png&quot;;&#xd;&#xa;java.io.InputStream  stream  = getClass().getResourceAsStream(PRINT_ICON_PATH);&#xd;&#xa;if (stream != null) {&#xd;&#xa;    try {&#xd;&#xa;        BufferedImage image = ImageIO.read(stream);&#xd;&#xa;        printButton.setIcon(new ImageIcon(image, &quot;&quot;));&#xd;&#xa;    } catch (Exception ex) {&#xd;&#xa;        System.err.println(&quot;Couldn&apos;t use print icon&quot;);&#xd;&#xa;    }&#xd;&#xa;} else {&#xd;&#xa;    System.err.println(&quot;Couldn&apos;t find print icon file at &quot; + PRINT_ICON_PATH);&#xd;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// setting icon of the print button&#xd;&#xa;final String PRINT_ICON_PATH=&quot;/be/chaouki/image/32px-print.png&quot;;&#xd;&#xa;java.io.InputStream  stream  = getClass().getResourceAsStream(PRINT_ICON_PATH);&#xd;&#xa;if (stream != null) {&#xd;&#xa;    try {&#xd;&#xa;        BufferedImage image = ImageIO.read(stream);&#xd;&#xa;        printButton.setIcon(new ImageIcon(image, &quot;&quot;));&#xd;&#xa;    } catch (Exception ex) {&#xd;&#xa;        System.err.println(&quot;Couldn&apos;t use print icon&quot;);&#xd;&#xa;    }&#xd;&#xa;} else {&#xd;&#xa;    System.err.println(&quot;Couldn&apos;t find print icon file at &quot; + PRINT_ICON_PATH);&#xd;&#xa;}"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="discount1CheckBox">

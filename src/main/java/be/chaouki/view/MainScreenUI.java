@@ -5,6 +5,7 @@
  */
 package be.chaouki.view;
 
+import be.chaouki.dao.PersistenceManager;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
@@ -226,8 +227,16 @@ public class MainScreenUI extends javax.swing.JFrame {
         discount2CheckBox = new javax.swing.JCheckBox();
         discount3CheckBox = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PizzaMenu");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -2287,6 +2296,14 @@ public class MainScreenUI extends javax.swing.JFrame {
         updateTotalPrice();
     }//GEN-LAST:event_discount3CheckBoxActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        applicationClosingCleanUp();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        applicationInit();
+    }//GEN-LAST:event_formWindowOpened
+
     private void updateRowHeights(JTable table) {
         try {
             for (int row = 0; row < table.getRowCount(); row++) {
@@ -2364,8 +2381,14 @@ public class MainScreenUI extends javax.swing.JFrame {
         updateRowHeights(jTable);
         updateTotalPrice();
     }
-    
-    
+
+    private void applicationClosingCleanUp() {
+        PersistenceManager.close();
+    }
+
+    private void applicationInit() {
+        PersistenceManager.loadFactory();
+    }
 
     private static class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 

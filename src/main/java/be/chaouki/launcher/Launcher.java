@@ -5,6 +5,7 @@
  */
 package be.chaouki.launcher;
 
+import be.chaouki.dao.CustomerDAO_JPA;
 import be.chaouki.view.MainScreenUI;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -26,6 +27,12 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        CustomerDAO_JPA dao=new CustomerDAO_JPA();
+        dao.add(null);
+        System.out.println("Ok");
+        
+        if(true) return;
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
