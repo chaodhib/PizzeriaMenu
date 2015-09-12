@@ -31,7 +31,7 @@ public class CustomerDAO_JPA implements CustomerDAO {
     private EntityManager em;
     
     public CustomerDAO_JPA(){
-        em=PersistenceManager.getInstanceEM();
+        em=PersistenceManager.getEntityManager();
     }
 
     /**
@@ -42,14 +42,6 @@ public class CustomerDAO_JPA implements CustomerDAO {
         this.em=em;
         log.info("CustomerDAO_JPA construct with factory"+em.toString());
     }
-
-    @Override
-    protected void finalize() throws Throwable {
-        em.close();
-        super.finalize();
-    }
-    
-    
     
     @Override
     public void add(Customer customer){
@@ -58,27 +50,65 @@ public class CustomerDAO_JPA implements CustomerDAO {
         em.getTransaction().commit();
     }
     
-//    private void displayAll(EntityManager em){
-//        TypedQuery<Customer> createQuery = em.createQuery("FROM Customer", Customer.class);
-//        List<Customer> resultList = createQuery.getResultList();
-//        
-//        log.info("CUSTOMER TABLE START----------------------------------------------------");
-//        for(Customer c : resultList)
-//            log.info(c.toString());
-//        log.info("CUSTOMER TABLE END------------------------------------------------------");
-//    }
-    
     @Override
     public List<Customer> findAll(){
         TypedQuery<Customer> createQuery = em.createQuery("FROM Customer", Customer.class);
         List<Customer> resultList = createQuery.getResultList();
-        log.info("findAll call in DAO_JPA. Size= "+resultList.size());
         return resultList;
     }
-    
+
     @Override
-    public List<Customer> find(){
-        return null;
+    public Customer findById(Long id) {
+        return em.find(Customer.class, id);
     }
-    
+
+    @Override
+    public List<Customer> findSearch(Long id, String name, String address, Integer postalCode, String municipality, String phoneNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void modify(Customer modifiedCustomer) {
+        em.getTransaction().begin();
+        Customer customer=em.find(Customer.class, modifiedCustomer.getId());
+        if(customer==null)
+            throw new IllegalArgumentException("Attempt at modyfying a customer with an unknown id");
+        
+        em.merge(modifiedCustomer);
+        em.getTransaction().commit();
+    }
+
+    @Override
+    public void modify(Long id, String name, String address, Integer postalCode, String municipality, String phoneNumber) {
+        em.getTransaction().begin();
+        Customer customer=em.find(Customer.class, id);
+        if(customer==null)
+            throw new IllegalArgumentException("Attempt at modyfying a customer with an unknown id");
+        
+        Customer modifiedCustomer=new Customer(id, name, address, postalCode, municipality, phoneNumber);
+        em.merge(modifiedCustomer);
+        em.getTransaction().commit();
+    }
+
+    @Override
+    public void remove(Customer customer) {
+        em.getTransaction().begin();
+        Customer customerToDelete=em.find(Customer.class, customer.getId());
+        if(customerToDelete==null)
+            throw new IllegalArgumentException("Attempt at deleting a customer with an unknown id");
+        
+        em.remove(em.merge(customerToDelete));
+        em.getTransaction().commit();
+    }
+
+    @Override
+    public void remove(Long id) {
+        em.getTransaction().begin();
+        Customer customerToDelete=em.find(Customer.class, id);
+        if(customerToDelete==null)
+            throw new IllegalArgumentException("Attempt at deleting a customer with an unknown id");
+        
+        em.remove(em.merge(customerToDelete));
+        em.getTransaction().commit();
+    }
 }

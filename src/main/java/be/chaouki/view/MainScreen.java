@@ -48,13 +48,13 @@ import be.chaouki.report.OrderLineDTO;
  *
  * @author chaouki
  */
-public class MainScreenUI extends javax.swing.JFrame {
+public class MainScreen extends javax.swing.JFrame {
 
     private Order tableModel=be.chaouki.model.Order.getInstance();
     /**
      * Creates new form MainScreenUI
      */
-    public MainScreenUI() {
+    public MainScreen() {
         initComponents();
     }
 
@@ -2387,7 +2387,7 @@ public class MainScreenUI extends javax.swing.JFrame {
     }
 
     private void applicationInit() {
-        PersistenceManager.loadFactory();
+        PersistenceManager.load();
     }
 
     private static class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {

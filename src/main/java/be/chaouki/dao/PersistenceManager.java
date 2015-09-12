@@ -36,17 +36,20 @@ import javax.persistence.Persistence;
 public class PersistenceManager{
     
     private static final EntityManagerFactory emFactory=Persistence.createEntityManagerFactory("persistence");
+    private static final EntityManager em=emFactory.createEntityManager();
     
-    // the EntityManagerFactory "emFactory" is lazy loaded. This method forces its loading when called.
-    public static void loadFactory(){
-        ; 
+    // the factory and the entity manager are lazy loaded. This method forces their loading by the class loader when called.
+    public static void load(){
+        ; // intentionaly empty
     }
     
-    public static EntityManager getInstanceEM() {
+    public static EntityManager getEntityManager() {
         return emFactory.createEntityManager();
     }
     
     public static void close(){
+        if(em.isOpen())
+            em.close();
         if(emFactory.isOpen())
             emFactory.close();
     }

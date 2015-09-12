@@ -19,6 +19,7 @@ import org.dbunit.ext.h2.H2DataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.HibernateException;
 import org.hibernate.internal.SessionImpl;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -46,7 +47,8 @@ public abstract class AbstractDbUnitJpaTest {
 	 */
 	@BeforeClass
 	public static void initEntityManager() throws HibernateException, DatabaseUnitException {
-		entityManagerFactory = Persistence.createEntityManagerFactory("persistence-test");
+		entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+//		entityManagerFactory = Persistence.createEntityManagerFactory("persistence-test");
 		entityManager = entityManagerFactory.createEntityManager();
 		connection = new DatabaseConnection(((SessionImpl) (entityManager.getDelegate())).connection());
 		connection.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new H2DataTypeFactory());
@@ -72,7 +74,10 @@ public abstract class AbstractDbUnitJpaTest {
 	@Before
 	public void cleanDB() throws DatabaseUnitException, SQLException {
             log.info("cleanDB() call");
+            entityManager.getTransaction().begin();
             DatabaseOperation.CLEAN_INSERT.execute(connection, dataset);
 //            DatabaseOperation.DELETE_ALL.execute(connection, dataset);
+            entityManager.getTransaction().commit();
+            
 	}
 }

@@ -35,8 +35,4 @@ public class DAOFactory {
     public static CustomerDAO getCustomerDAO(EntityManager em){
         return new CustomerDAO_JPA(em);
     }
-    
-//    public static CustomerDAO getCustomerDAO(){
-//        return new CustomerDAO_JPA();
-//    }
 }
