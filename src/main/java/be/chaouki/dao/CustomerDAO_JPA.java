@@ -64,7 +64,34 @@ public class CustomerDAO_JPA implements CustomerDAO {
 
     @Override
     public List<Customer> findSearch(Long id, String name, String address, Integer postalCode, String municipality, String phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int criteriaCount=0;
+        if(id!=null)
+            criteriaCount++;
+        if(name!=null)
+            criteriaCount++;
+        if(address!=null)
+            criteriaCount++;
+        if(postalCode!=null)
+            criteriaCount++;
+        if(municipality!=null)
+            criteriaCount++;
+        if(phoneNumber!=null)
+            criteriaCount++;
+        
+        if(criteriaCount==0)
+            return findAll();
+        boolean includeAnd=criteriaCount>1?true:false; // insert ADD in the WHERE clause
+        
+        String query=" SELECT c FROM Customer c WHERE";
+        if(id!=null){
+            String cdtClause="c.id = :id";
+            if(includeAnd)
+                cdtClause="AND "+cdtClause;
+        }
+        
+        TypedQuery<Customer> createQuery = em.createQuery(query, Customer.class);
+        List<Customer> resultList = createQuery.getResultList();
+        return resultList;
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.junit.After;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -23,24 +24,26 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
     private static Logger log = LoggerFactory.getLogger(CustomerDAOTest.class);
     private static CustomerDAO customerDAO;
     
-    @Before
-    public void init(){
-        log.info("init() call");
+    @BeforeClass
+    public static void init(){
         customerDAO=DAOFactory.getCustomerDAO(entityManager);
+    }
+    
+    @After
+    public void afterStatePrint(){
+        log.info("CUSTOMER TABLE START----------------------------------------------------");
+        for(Customer c : customerDAO.findAll())
+            log.info(c.toString());
+        log.info("CUSTOMER TABLE END------------------------------------------------------");
     }
     
     @Test
     public void testAdd(){
         final int INITIAL_SIZE=customerDAO.findAll().size();
         
-        Customer customer= new Customer();
-        customer.setAddress("Rue Derp");
-        customer.setMunicipality("DerpVille");
-        customer.setName("Monsieur Derpidou");
-        customer.setPostalCode(435);
-        customer.setPhoneNumber("0477567778");
-        
+        Customer customer= new Customer(null, "Monsieur Derpidou", "Rue Derp", 435, "DerpVille", "0477567778");
         customerDAO.add(customer);
+        
         Assert.assertEquals(INITIAL_SIZE+1, customerDAO.findAll().size());
         
         Customer newCustomer=customerDAO.findById(customer.getId());
@@ -102,22 +105,63 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
     }
     
     @Test
-    public void modifyTest(){
-        log.info("modify TEST START");
+    public void modifyByEntityTest(){
+        log.info("Test 5");
         Customer customer = customerDAO.findById(500L);
+        Assert.assertNotNull(customer);
+        Assert.assertEquals("test street", customer.getAddress());
+        
         customer.setAddress(customer.getAddress()+" four");
+        customerDAO.modify(customer);
         
         Customer customerModified = customerDAO.findById(500L);
+        Assert.assertNotNull(customerModified);
         Assert.assertEquals("test street four", customerModified.getAddress());
     }
     
-    @After
-    public void afterStatePrint(){
-        log.info("CUSTOMER TABLE START----------------------------------------------------");
-        for(Customer c : customerDAO.findAll())
-            log.info(c.toString());
-        log.info("CUSTOMER TABLE END------------------------------------------------------");
+    @Test
+    public void modifyByFieldsTest(){
+        log.info("Test 6");
+        Customer customer = customerDAO.findById(500L);
+        Assert.assertNotNull(customer);
+        Assert.assertEquals("test street", customer.getAddress());
         
+        customerDAO.modify(customer.getId(), customer.getName(), customer.getAddress()+" four", customer.getPostalCode(), customer.getMunicipality(), customer.getPhoneNumber());
         
+        Customer customerModified = customerDAO.findById(500L);
+        Assert.assertNotNull(customerModified);
+        Assert.assertEquals("test street four", customerModified.getAddress());
+    }
+    
+    @Test
+    public void removeByEntityTest(){
+        log.info("Test 7");
+        final int INITIAL_SIZE=3;
+        
+        Customer customer = customerDAO.findById(501L);
+        Assert.assertNotNull(customer);
+        
+        Assert.assertEquals(INITIAL_SIZE, customerDAO.findAll().size());
+        
+        customerDAO.remove(customer);
+        Customer customerDeleted = customerDAO.findById(501L);
+        Assert.assertNull(customerDeleted);
+        Assert.assertEquals(INITIAL_SIZE-1, customerDAO.findAll().size());
+    }
+    
+    @Test
+    public void removeByIdTest(){
+        log.info("Test 8");
+        final int INITIAL_SIZE=3;
+        
+        Customer customer = customerDAO.findById(501L);
+        Assert.assertNotNull(customer);
+        
+        Assert.assertEquals(INITIAL_SIZE, customerDAO.findAll().size());
+        
+        customerDAO.remove(501L);
+        Customer customerDeleted = customerDAO.findById(501L);
+        Assert.assertNull(customerDeleted);
+        Assert.assertEquals(INITIAL_SIZE-1, customerDAO.findAll().size());
     }
 }

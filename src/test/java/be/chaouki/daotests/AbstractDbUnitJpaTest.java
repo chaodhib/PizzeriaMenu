@@ -74,6 +74,7 @@ public abstract class AbstractDbUnitJpaTest {
 	@Before
 	public void cleanDB() throws DatabaseUnitException, SQLException {
             log.info("cleanDB() call");
+            entityManager.clear();
             entityManager.getTransaction().begin();
             DatabaseOperation.CLEAN_INSERT.execute(connection, dataset);
 //            DatabaseOperation.DELETE_ALL.execute(connection, dataset);
