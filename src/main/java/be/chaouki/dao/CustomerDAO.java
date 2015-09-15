@@ -22,21 +22,24 @@ public interface CustomerDAO {
     /**
      * This method finds all Customers that match the criterias given by parameters.
      * 
-     * It will ignore upper/lowercase differences for the strings name, address and municipality.
+     * <p>name, adress and municipality can be multiple words with a white space
+     * acting as a seperator. Example: FindSearch(null, "charles fred", null,...)
+     * will return the customers named "fred charles", "charles frederick"
+     * and even "frederickcharles". Upper/lowercase differences for 
+     * the name, address and municipality are ignored.
      * 
-     * Id and postalCode must be exact matches.
+     * <p>!!! Accents are not supported !!!
      * 
-     * name, adress and municipality must be ONE word contained in the stored string.
-     * example: findSearch(null, "Peter", null, null, ...) will find the customers
-     * named "Peterpan" and "Panpeterone". However findSearch(null, "Peter Pan", null, null, ...)
-     * will not find "Pan Peter" nor "Peter".
+     * <p>Id and postalCode must be exact matches.
      * 
-     * Multiple criterias can be used at the same time and the result set will be
+     * <p>The phoneNumber given should either be an exact match or it should 
+     * at least match the tail of the one saved. Example: if "555" is given 
+     * as parameter, customers with "0477777555" and "+3277777555" will 
+     * be returned but not "555486443" or "04775556534".
+     * 
+     * <p>Multiple criterias (a name and a phone number for example) can be used 
+     * at the same time and the result set will be 
      * the intersection of the sets returned by the individuals queries.
-     * 
-     * XXXXXXXXXX PHONE NUMBER XXXXXXXXXXXXXXXXXXXXXX
-     * 
-     * ! Accents are not supported !
      * 
      * @param id
      * @param name

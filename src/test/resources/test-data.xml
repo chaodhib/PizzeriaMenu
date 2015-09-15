@@ -7,6 +7,8 @@ persisting data at id=1 -->
 <!-- cf: http://florent-dupont.blogspot.be/2014/01/arquillian-jpa-et-datasets-22-utiliser.html -->
 <dataset>
 	<CUSTOMER id="500" name="customerTest" address="test street" />
-	<CUSTOMER id="501" name="customerTest2"  address="test street two" /> 
-	<CUSTOMER id="502" name="onetwothree"  address="test street three" /> 
+	<CUSTOMER id="501" name="customerTest2"  address="test street two" phoneNumber="0477777555"/> 
+	<CUSTOMER id="502" name="onetwothree"  address="test street three" phoneNumber="+3277777555"/> 
+	<CUSTOMER id="503" name="paul jean charles"  address="test street five" phoneNumber="555486443"/> 
+	<CUSTOMER id="504" name="new guy"  address="someplace" phoneNumber="04775556534"/> 
 </dataset>

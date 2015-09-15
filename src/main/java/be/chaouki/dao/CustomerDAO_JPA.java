@@ -64,73 +64,34 @@ public class CustomerDAO_JPA implements CustomerDAO {
 
     @Override
     public List<Customer> findSearch(Long id, String name, String address, Integer postalCode, String municipality, String phoneNumber) {
-        int criteriaCount=0;
-        if(id!=null)
-            criteriaCount++;
-        if(name!=null)
-            criteriaCount++;
-        if(address!=null)
-            criteriaCount++;
-        if(postalCode!=null)
-            criteriaCount++;
-        if(municipality!=null)
-            criteriaCount++;
-        if(phoneNumber!=null)
-            criteriaCount++;
-        
-        if(criteriaCount==0)
+        if(id==null && name==null && address==null && postalCode==null && 
+                municipality==null && phoneNumber==null)
             return findAll();
         
-        String query=" SELECT c FROM Customer c WHERE ";
+        String query=" SELECT c FROM Customer c WHERE 1=1";
+        String[] nameWords=null, addressWords=null, municipalityWords=null;
         
-        int criteriaProcessed=0;
-        // first criteria
-        if(id!=null){
-            query+="c.id = :id";
-            criteriaProcessed=1;
+        if(id!=null)
+            query+=" AND c.id = :id";
+        if(name!=null){
+            nameWords = name.split("\\s+"); // "anne frank" -> "anne" and "frank"
+            for(int i=0; i<nameWords.length; i++)
+                query+=" AND UPPER(c.name) LIKE :name"+i;
         }
-        else if(name!=null){
-            query+="UPPER(c.name) LIKE :name";
-            criteriaProcessed=2;
+        if(address!=null){
+            addressWords = address.split("\\s+");
+            for(int i=0; i<addressWords.length; i++)
+                query+=" AND UPPER(c.address) LIKE :address"+i;
         }
-        else if(address!=null){
-            query+="UPPER(c.address) LIKE :address";
-            criteriaProcessed=3;
+        if(postalCode!=null)
+            query+=" AND c.postalCode = :postalCode";
+        if(municipality!=null){
+            municipalityWords = municipality.split("\\s+");
+            for(int i=0; i<municipalityWords.length; i++)
+                query+=" AND UPPER(c.municipality) LIKE :municipality"+i;
         }
-        else if(postalCode!=null){
-            query+="c.postalCode = :postalCode";
-            criteriaProcessed=4;
-        }
-        else if(municipality!=null){
-            query+="UPPER(c.municipality) LIKE :municipality";
-            criteriaProcessed=5;
-        }
-        else if(phoneNumber!=null){
-            query+="c.phoneNumber = :phoneNumber";
-            criteriaProcessed=6;
-        }
-        
-        // 2 or more criterias
-        if(criteriaCount>1){
-            switch(criteriaProcessed){
-                case 1:
-                    if(name!=null)
-                        query+=" AND UPPER(c.name) LIKE :name";
-                case 2:
-                    if(address!=null)
-                        query+=" AND UPPER(c.address) LIKE :address";
-                case 3:
-                    if(postalCode!=null)
-                        query+=" AND c.postalCode = :postalCode";
-                case 4:
-                    if(municipality!=null)
-                        query+=" AND UPPER(c.municipality) LIKE :municipality";
-                case 5:
-                    if(phoneNumber!=null)
-                        query+=" AND c.phoneNumber = :phoneNumber";
-                    break;
-            }
-        }
+        if(phoneNumber!=null)
+            query+=" AND c.phoneNumber LIKE :phoneNumber";
         
         log.info(query);
         
@@ -139,15 +100,18 @@ public class CustomerDAO_JPA implements CustomerDAO {
         if(id!=null)
             createQuery.setParameter("id", id);
         if(name!=null)
-            createQuery.setParameter("name", "%" + name.toUpperCase() + "%");
+            for(int i=0; i<nameWords.length; i++)
+                createQuery.setParameter("name"+i, "%" + nameWords[i].toUpperCase() + "%");
         if(address!=null)
-            createQuery.setParameter("address", "%" + address.toUpperCase() + "%");
+            for(int i=0; i<addressWords.length; i++)
+                createQuery.setParameter("address"+i, "%" + addressWords[i].toUpperCase() + "%");
         if(postalCode!=null)
             createQuery.setParameter("postalCode", postalCode);
         if(municipality!=null)
-            createQuery.setParameter("municipality", "%" + municipality.toUpperCase() + "%");
+            for(int i=0; i<municipalityWords.length; i++)
+                createQuery.setParameter("municipality"+i, "%" + municipalityWords[i].toUpperCase() + "%");
         if(phoneNumber!=null)
-            createQuery.setParameter("phoneNumber", phoneNumber);
+            createQuery.setParameter("phoneNumber", "%" + phoneNumber);
         
         List<Customer> resultList = createQuery.getResultList();
         return resultList;
