@@ -80,16 +80,75 @@ public class CustomerDAO_JPA implements CustomerDAO {
         
         if(criteriaCount==0)
             return findAll();
-        boolean includeAnd=criteriaCount>1?true:false; // insert ADD in the WHERE clause
         
-        String query=" SELECT c FROM Customer c WHERE";
+        String query=" SELECT c FROM Customer c WHERE ";
+        
+        int criteriaProcessed=0;
+        // first criteria
         if(id!=null){
-            String cdtClause="c.id = :id";
-            if(includeAnd)
-                cdtClause="AND "+cdtClause;
+            query+="c.id = :id";
+            criteriaProcessed=1;
+        }
+        else if(name!=null){
+            query+="UPPER(c.name) LIKE :name";
+            criteriaProcessed=2;
+        }
+        else if(address!=null){
+            query+="UPPER(c.address) LIKE :address";
+            criteriaProcessed=3;
+        }
+        else if(postalCode!=null){
+            query+="c.postalCode = :postalCode";
+            criteriaProcessed=4;
+        }
+        else if(municipality!=null){
+            query+="UPPER(c.municipality) LIKE :municipality";
+            criteriaProcessed=5;
+        }
+        else if(phoneNumber!=null){
+            query+="c.phoneNumber = :phoneNumber";
+            criteriaProcessed=6;
         }
         
+        // 2 or more criterias
+        if(criteriaCount>1){
+            switch(criteriaProcessed){
+                case 1:
+                    if(name!=null)
+                        query+=" AND UPPER(c.name) LIKE :name";
+                case 2:
+                    if(address!=null)
+                        query+=" AND UPPER(c.address) LIKE :address";
+                case 3:
+                    if(postalCode!=null)
+                        query+=" AND c.postalCode = :postalCode";
+                case 4:
+                    if(municipality!=null)
+                        query+=" AND UPPER(c.municipality) LIKE :municipality";
+                case 5:
+                    if(phoneNumber!=null)
+                        query+=" AND c.phoneNumber = :phoneNumber";
+                    break;
+            }
+        }
+        
+        log.info(query);
+        
         TypedQuery<Customer> createQuery = em.createQuery(query, Customer.class);
+        
+        if(id!=null)
+            createQuery.setParameter("id", id);
+        if(name!=null)
+            createQuery.setParameter("name", "%" + name.toUpperCase() + "%");
+        if(address!=null)
+            createQuery.setParameter("address", "%" + address.toUpperCase() + "%");
+        if(postalCode!=null)
+            createQuery.setParameter("postalCode", postalCode);
+        if(municipality!=null)
+            createQuery.setParameter("municipality", "%" + municipality.toUpperCase() + "%");
+        if(phoneNumber!=null)
+            createQuery.setParameter("phoneNumber", phoneNumber);
+        
         List<Customer> resultList = createQuery.getResultList();
         return resultList;
     }

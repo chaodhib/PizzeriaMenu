@@ -52,7 +52,7 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
     }
 
     @Test
-    public void testFind() {
+    public void testFindById() {
             Customer customer = customerDAO.findById(500L);
             Assert.assertNotNull(customer);
             Assert.assertEquals("customerTest", customer.getName());
@@ -63,11 +63,15 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
         Assert.assertEquals(3, customerDAO.findAll().size());
     }
     
-    @Ignore
     @Test
-    public void testFindByName(){
+    public void testFindByCriteria(){
         List<Customer> resultList=null;
         
+        // find by nothing (find all)
+        resultList=customerDAO.findSearch(null, null, null, null, null, null);
+        Assert.assertEquals(3, resultList.size());
+        
+        // find by name
         resultList=customerDAO.findSearch(null, "customer", null, null, null, null);
         Assert.assertEquals(2, resultList.size());
         
@@ -102,6 +106,21 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
         resultList=customerDAO.findSearch(null, "street", null, null, null, null);
         Assert.assertEquals(0, resultList.size());
         
+        // find by id
+        resultList=customerDAO.findSearch(500L, null, null, null, null, null);
+        Assert.assertEquals(1, resultList.size());
+        Assert.assertEquals(500L, resultList.get(0).getId().longValue());
+        Assert.assertEquals("customerTest", resultList.get(0).getName());
+        Assert.assertEquals("test street", resultList.get(0).getAddress());
+        
+        // find by id and name
+        resultList=customerDAO.findSearch(500L, "customerTest", null, null, null, null);
+        Assert.assertEquals(1, resultList.size());
+        Assert.assertEquals(500L, resultList.get(0).getId().longValue());
+        Assert.assertEquals("customerTest", resultList.get(0).getName());
+        
+        resultList=customerDAO.findSearch(500L, "customerTestA", null, null, null, null);
+        Assert.assertEquals(0, resultList.size());
     }
     
     @Test
