@@ -108,12 +108,21 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
         resultList=customerDAO.findSearch(null, "street", null, null, null, null);
         Assert.assertEquals(0, resultList.size());
         
+        resultList=customerDAO.findSearch(null, "", null, null, null, null);
+        Assert.assertEquals(INITIAL_SIZE_PREDICTED, resultList.size());
+        
+        resultList=customerDAO.findSearch(null, " ", null, null, null, null);
+        Assert.assertEquals(INITIAL_SIZE_PREDICTED, resultList.size());
+        
         // find by id
         resultList=customerDAO.findSearch(500L, null, null, null, null, null);
         Assert.assertEquals(1, resultList.size());
         Assert.assertEquals(500L, resultList.get(0).getId().longValue());
         Assert.assertEquals("customerTest", resultList.get(0).getName());
-        Assert.assertEquals("test street", resultList.get(0).getAddress());
+        Assert.assertEquals("test street 1", resultList.get(0).getAddress());
+        
+        resultList=customerDAO.findSearch(1L, null, null, null, null, null);
+        Assert.assertEquals(0, resultList.size());
         
         // find by id and name
         resultList=customerDAO.findSearch(500L, "customerTest", null, null, null, null);
@@ -124,17 +133,31 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
         resultList=customerDAO.findSearch(500L, "customerTestA", null, null, null, null);
         Assert.assertEquals(0, resultList.size());
         
+        // find by municipality
+        resultList=customerDAO.findSearch(null, null, null, null, "Brussel", null);
+        Assert.assertEquals(1, resultList.size());
+        Assert.assertEquals(500L, resultList.get(0).getId().longValue());
+        
+        // find by postalCode=
+        resultList=customerDAO.findSearch(null, null, null, 1000, null, null);
+        Assert.assertEquals(1, resultList.size());
+        Assert.assertEquals(500L, resultList.get(0).getId().longValue());
+        
         // find by phone number
         resultList=customerDAO.findSearch(null, null, null, null, null, "555");
         Assert.assertEquals(2, resultList.size());
         Assert.assertEquals(501L, resultList.get(0).getId().longValue());
         Assert.assertEquals(502L, resultList.get(1).getId().longValue());
-    }
-    
-    @Test
-    public void findByCriteriaAdvanced(){
-        List<Customer> resultList=null;
         
+        resultList=customerDAO.findSearch(null, null, null, null, null, "");
+        Assert.assertEquals(INITIAL_SIZE_PREDICTED, resultList.size());
+        
+        resultList=customerDAO.findSearch(null, null, null, null, null, " ");
+        Assert.assertEquals(INITIAL_SIZE_PREDICTED, resultList.size());
+        
+        /**
+         * TEST WITH MULTIPLE KEYWORDS IN SAME CRITERIA
+         */
         // Test with multiple words in the "name" parameter
         resultList=customerDAO.findSearch(null, "paul jean charles", null, null, null, null);
         Assert.assertEquals(1, resultList.size());
@@ -169,33 +192,39 @@ public class CustomerDAOTest extends AbstractDbUnitJpaTest {
         resultList=customerDAO.findSearch(null, null, "two street", null, null, null);
         Assert.assertEquals(1, resultList.size());
         Assert.assertEquals(501L, resultList.get(0).getId().longValue());
+        
+        // test with name, adress and phone
+        resultList=customerDAO.findSearch(null, "test", "street", null, null, "555");
+        Assert.assertEquals(1, resultList.size());
+        Assert.assertEquals(501L, resultList.get(0).getId().longValue());
+
     }
     
     @Test
     public void modifyByEntityTest(){
         Customer customer = customerDAO.findById(500L);
         Assert.assertNotNull(customer);
-        Assert.assertEquals("test street", customer.getAddress());
+        Assert.assertEquals("test street 1", customer.getAddress());
         
         customer.setAddress(customer.getAddress()+" four");
         customerDAO.modify(customer);
         
         Customer customerModified = customerDAO.findById(500L);
         Assert.assertNotNull(customerModified);
-        Assert.assertEquals("test street four", customerModified.getAddress());
+        Assert.assertEquals("test street 1 four", customerModified.getAddress());
     }
     
     @Test
     public void modifyByFieldsTest(){
         Customer customer = customerDAO.findById(500L);
         Assert.assertNotNull(customer);
-        Assert.assertEquals("test street", customer.getAddress());
+        Assert.assertEquals("test street 1", customer.getAddress());
         
         customerDAO.modify(customer.getId(), customer.getName(), customer.getAddress()+" four", customer.getPostalCode(), customer.getMunicipality(), customer.getPhoneNumber());
         
         Customer customerModified = customerDAO.findById(500L);
         Assert.assertNotNull(customerModified);
-        Assert.assertEquals("test street four", customerModified.getAddress());
+        Assert.assertEquals("test street 1 four", customerModified.getAddress());
     }
     
     @Test

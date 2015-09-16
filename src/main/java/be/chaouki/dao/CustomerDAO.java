@@ -26,7 +26,8 @@ public interface CustomerDAO {
      * acting as a seperator. Example: FindSearch(null, "charles fred", null,...)
      * will return the customers named "fred charles", "charles frederick"
      * and even "frederickcharles". Upper/lowercase differences for 
-     * the name, address and municipality are ignored.
+     * the name, address and municipality are ignored. Empty string or strings
+     * with only whitespaces (example "   ") are ignored and treated as a null.
      * 
      * <p>!!! Accents are not supported !!!
      * 
@@ -35,7 +36,8 @@ public interface CustomerDAO {
      * <p>The phoneNumber given should either be an exact match or it should 
      * at least match the tail of the one saved. Example: if "555" is given 
      * as parameter, customers with "0477777555" and "+3277777555" will 
-     * be returned but not "555486443" or "04775556534".
+     * be returned but not "555486443" or "04775556534". Empty string or strings
+     * with only whitespaces (example "   ") are ignored and treated as a null.
      * 
      * <p>Multiple criterias (a name and a phone number for example) can be used 
      * at the same time and the result set will be 

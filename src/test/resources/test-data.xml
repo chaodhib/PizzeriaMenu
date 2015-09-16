@@ -6,9 +6,9 @@ no matter how many entries we inject by dataset, the test will start
 persisting data at id=1 -->
 <!-- cf: http://florent-dupont.blogspot.be/2014/01/arquillian-jpa-et-datasets-22-utiliser.html -->
 <dataset>
-	<CUSTOMER id="500" name="customerTest" address="test street" />
-	<CUSTOMER id="501" name="customerTest2"  address="test street two" phoneNumber="0477777555"/> 
-	<CUSTOMER id="502" name="onetwothree"  address="test street three" phoneNumber="+3277777555"/> 
-	<CUSTOMER id="503" name="paul jean charles"  address="test street five" phoneNumber="555486443"/> 
-	<CUSTOMER id="504" name="new guy"  address="someplace" phoneNumber="04775556534"/> 
+	<CUSTOMER id="500" name="customerTest" address="test street 1" municipality="Brussels" postalCode="1000"/>
+	<CUSTOMER id="501" name="customerTest2"  address="test street two 872" phoneNumber="0477777555"/> 
+	<CUSTOMER id="502" name="onetwothree"  address="test street three 33" phoneNumber="+3277777555"/> 
+	<CUSTOMER id="503" name="paul jean charles"  address="test street five 2872" phoneNumber="555486443"/> 
+	<CUSTOMER id="504" name="new guy"  address="someplace 2825" phoneNumber="04775556534"/> 
 </dataset>

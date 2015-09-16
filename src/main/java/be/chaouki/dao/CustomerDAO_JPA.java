@@ -73,24 +73,24 @@ public class CustomerDAO_JPA implements CustomerDAO {
         
         if(id!=null)
             query+=" AND c.id = :id";
-        if(name!=null){
+        if(name!=null && !name.trim().isEmpty()){
             nameWords = name.split("\\s+"); // "anne frank" -> "anne" and "frank"
             for(int i=0; i<nameWords.length; i++)
                 query+=" AND UPPER(c.name) LIKE :name"+i;
         }
-        if(address!=null){
+        if(address!=null && !address.trim().isEmpty()){
             addressWords = address.split("\\s+");
             for(int i=0; i<addressWords.length; i++)
                 query+=" AND UPPER(c.address) LIKE :address"+i;
         }
         if(postalCode!=null)
             query+=" AND c.postalCode = :postalCode";
-        if(municipality!=null){
+        if(municipality!=null && !municipality.trim().isEmpty()){
             municipalityWords = municipality.split("\\s+");
             for(int i=0; i<municipalityWords.length; i++)
                 query+=" AND UPPER(c.municipality) LIKE :municipality"+i;
         }
-        if(phoneNumber!=null)
+        if(phoneNumber!=null && !phoneNumber.trim().isEmpty())
             query+=" AND c.phoneNumber LIKE :phoneNumber";
         
         log.info(query);
@@ -99,18 +99,18 @@ public class CustomerDAO_JPA implements CustomerDAO {
         
         if(id!=null)
             createQuery.setParameter("id", id);
-        if(name!=null)
+        if(name!=null && !name.trim().isEmpty())
             for(int i=0; i<nameWords.length; i++)
                 createQuery.setParameter("name"+i, "%" + nameWords[i].toUpperCase() + "%");
-        if(address!=null)
+        if(address!=null && !address.trim().isEmpty())
             for(int i=0; i<addressWords.length; i++)
                 createQuery.setParameter("address"+i, "%" + addressWords[i].toUpperCase() + "%");
         if(postalCode!=null)
             createQuery.setParameter("postalCode", postalCode);
-        if(municipality!=null)
+        if(municipality!=null && !municipality.trim().isEmpty())
             for(int i=0; i<municipalityWords.length; i++)
                 createQuery.setParameter("municipality"+i, "%" + municipalityWords[i].toUpperCase() + "%");
-        if(phoneNumber!=null)
+        if(phoneNumber!=null && !phoneNumber.trim().isEmpty())
             createQuery.setParameter("phoneNumber", "%" + phoneNumber);
         
         List<Customer> resultList = createQuery.getResultList();
