@@ -49,7 +49,6 @@ target/classes/jasperreports_extension.properties
 target/classes/log4j.properties
 target/classes/report.jasper
 target/maven-archiver/pom.properties
-pom.xml
 build.xml
 build/built-jar.properties
 build/classes/.netbeans_automatic_build
